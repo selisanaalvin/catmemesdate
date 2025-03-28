@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Will You Date Me?</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        background: linear-gradient(to bottom, #ffccf9, #ffebd6);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      h1 {
+        font-size: 2rem;
+        color: #ff6f91;
+        margin-bottom: 20px;
+        text-align: center;
+        animation: heartBeat 2s infinite;
+        padding: 0 10px;
+      }
+
+      .cat-meme {
+        text-align: center;
+        animation: zoomIn 1s ease-in-out;
+      }
+
+      .cat-meme img {
+        width: 100%;
+        max-width: 200px;
+        border-radius: 20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        border: 5px dashed #ff6f91;
+      }
+
+      .cat-meme p {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #6a1b9a;
+        text-shadow: 1px 1px 2px #ffb3c6;
+      }
+
+      .button-container {
+        margin-top: 40px;
+        animation: pulse 1.5s infinite;
+        padding: 0 10px;
+        text-align: center;
+      }
+
+      .button-container button {
+        background-color: #ff8fa3;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, background-color 0.3s;
+      }
+
+      .button-container button:hover {
+        background-color: #ff5c8a;
+        transform: scale(1.1);
+      }
+
+      @keyframes fireworks {
+        0% {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(2);
+        }
+      }
+
+      .firework {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ff6f91;
+        border-radius: 50%;
+        animation: fireworks 2s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="animate__animated animate__heartBeat">
+      Would you purr-fectly say yes to a date with me?
+    </h1>
+
+    <div id="content">
+      <div class="cat-meme animate__animated animate__zoomIn">
+        <img
+          src="https://cdn2.thecatapi.com/images/MTY3ODIyMQ.jpg"
+          alt="Cute kitten"
+        />
+        <p>"I'm pawsitive you should say yes!" 😸</p>
+      </div>
+    </div>
+    <div id="action">
+      <div class="button-container animate__animated animate__pulse">
+        <button id="yes-button">Yes</button>
+        <button id="no-button">No</button>
+      </div>
+    </div>
+
+    <script>
+      const contentDiv = document.getElementById("content");
+      const yesButton = document.getElementById("yes-button");
+      const noButton = document.getElementById("no-button");
+      const actionButton = document.getElementById("action");
+
+      let noClicks = 0;
+
+      noButton.addEventListener("click", (evt) => {
+        noClicks++;
+        if (noClicks === 1) {
+          contentDiv.innerHTML = `
+          <div class="cat-meme animate__animated animate__zoomIn">
+            <img src="https://cdn2.thecatapi.com/images/b1.jpg" alt="Adorable kitten">
+            <p>"Don't say no, you'll hiss the chance!" 🐾</p>
+          </div>
+        `;
+        } else if (noClicks === 2) {
+          contentDiv.innerHTML = `
+          <div class="cat-meme animate__animated animate__zoomIn">
+            <img src="https://cdn2.thecatapi.com/images/a1.jpg" alt="Fluffy kitten">
+            <p>"I knead you to say yes!" ❤️</p>
+          </div>
+        `;
+          noButton.style = "display: none";
+          yesButton.innerText = "Yes, let’s pounce on this! 😻";
+        }
+      });
+
+      yesButton.addEventListener("click", () => {
+        contentDiv.innerHTML = `
+        <div class="cat-meme animate__animated animate__zoomIn">
+          <img src="https://cdn2.thecatapi.com/images/cp.jpg" alt="Playful kitten">
+          <p>"You’d be the purr-fect match!" 🐱</p>
+        </div>
+        <div id="fireworks-container"></div>
+      `;
+        actionButton.style = "display: none";
+        showFireworks();
+      });
+
+      function showFireworks() {
+        const fireworksContainer = document.getElementById(
+          "fireworks-container"
+        );
+        for (let i = 0; i < 20; i++) {
+          const firework = document.createElement("div");
+          firework.classList.add("firework");
+          firework.style.left = `${Math.random() * 100}vw`;
+          firework.style.top = `${Math.random() * 100}vh`;
+          firework.style.backgroundColor = `hsl(${
+            Math.random() * 360
+          }, 100%, 70%)`;
+          firework.style.animationDuration = `${Math.random() * 2 + 1}s`;
+          fireworksContainer.appendChild(firework);
+          setTimeout(() => firework.remove(), 2000);
+        }
+      }
+    </script>
+  </body>
+</html>
